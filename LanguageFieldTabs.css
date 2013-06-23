@@ -1,0 +1,19 @@
+.langTabs{
+	padding: 0;
+}
+.langTabs .ui-tabs-nav.ui-widget-header{
+	padding: 0;
+}
+.langTabs .ui-tabs-panel{
+	padding: 0.9em;
+}
+.langTabs .ui-tabs-panel .LanguageSupportLabel {
+	display: none;
+}
+.langTabs.ui-tabs .ui-tabs-nav li a  {
+	padding: 0.4em 0.8em;
+	outline: none;
+}
+.langTabs.ui-tabs .ui-tabs-nav li.ui-state-active a {
+	cursor: default;
+}
