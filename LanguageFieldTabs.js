@@ -33,7 +33,7 @@ $(function(){
 				i++;
 			});
 
-			// $langTabsBox.prepend($langTabsBox.siblings(".description"));
+			$this.addClass("LangTabsContainer");
 
 			$langTabsBox.tabs();
 		}
