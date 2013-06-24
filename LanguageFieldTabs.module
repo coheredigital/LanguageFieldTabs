@@ -20,7 +20,7 @@ class LanguageFieldTabs extends WireData implements Module {
 		return array(
 
 			'title' => 'Language Field Tabs',
-			'version' => 101,
+			'version' => 102,
 			'summary' => 'Organizes Lagnuage Fields into tabs for a cleaner easier to use interface',
 			'href' => '',
 			'singular' => true,
@@ -30,10 +30,11 @@ class LanguageFieldTabs extends WireData implements Module {
 
 	public function init() {
 		$this->addHookAfter('ProcessPageEdit::execute', $this, 'loadTabs');
+		$this->addHookAfter('Process::executeEdit', $this, 'loadTabs');
 	}
 
 	public function loadTabs(){
-		$this->config->scripts->append($this->config->urls->LanguageFieldTabs . "LanguageFieldTabs.js");
-		$this->config->styles->append($this->config->urls->LanguageFieldTabs . "LanguageFieldTabs.css");
+		$this->config->scripts->add($this->config->urls->LanguageFieldTabs . "LanguageFieldTabs.js");
+		$this->config->styles->add($this->config->urls->LanguageFieldTabs . "LanguageFieldTabs.css");
 	}
 }
