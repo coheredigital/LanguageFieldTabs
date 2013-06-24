@@ -2,18 +2,32 @@
 	padding: 0;
 }
 .langTabs .ui-tabs-nav.ui-widget-header{
-	padding: 0;
+	padding: 2px 3px 0 ;
+	border-bottom: none;
 }
 .langTabs .ui-tabs-panel{
 	padding: 0.9em;
+	border-top: none;
 }
 .langTabs .ui-tabs-panel .LanguageSupportLabel {
 	display: none;
+
+}
+.langTabs.ui-tabs .ui-tabs-nav li {
+	margin: 0 4px 0 0;
 }
 .langTabs.ui-tabs .ui-tabs-nav li a  {
-	padding: 0.4em 0.8em;
+	padding: 0.3em 0.7em;
+
 	outline: none;
+	font-size: 11px;
+}
+.langTabs.ui-tabs .ui-tabs-nav li.ui-state-active.ui-state-default{
+	border: 1px solid #fff;
+	padding-bottom: 0;
 }
 .langTabs.ui-tabs .ui-tabs-nav li.ui-state-active a {
 	cursor: default;
+	background: #fff;
+	margin: 0;
 }
