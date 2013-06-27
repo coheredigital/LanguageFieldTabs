@@ -1,3 +1,6 @@
+.langTabsContainer{
+	position: relative;
+}
 .langTabs{
 	padding: 0;
 }
@@ -18,7 +21,7 @@
 }
 .langTabs.ui-tabs .ui-tabs-nav li a  {
 	padding: 0.3em 0.7em;
-
+	font-weight: bold;
 	outline: none;
 	font-size: 11px;
 }
@@ -26,8 +29,39 @@
 	border: 1px solid #fff;
 	padding-bottom: 0;
 }
+.langTabs.ui-tabs .ui-tabs-nav li.ui-state-active {
+	background: #fff;
+}
 .langTabs.ui-tabs .ui-tabs-nav li.ui-state-active a {
 	cursor: default;
 	background: #fff;
 	margin: 0;
+}
+
+.langTabsContainer > .langTabsToggle{
+	position: absolute;
+	z-index: 10;
+	right: 0;
+	top: 0;
+	display: block;
+	/*width: 16px;*/
+	/*height: 16px;*/
+	/*padding: 0 5px 0 2px;*/
+	padding: 2px;
+	padding-top: 1px;
+	text-transform: uppercase;
+	font-size: 12px;
+}
+.langTabsContainer > .langTabsToggle > .ui-icon{
+	margin: 0;
+
+}
+
+.langTabEmpty{
+	opacity: 0.5;
+	font-weight: normal !important;
+}
+
+.langTabsOff > ul{
+	display: none !important;
 }
