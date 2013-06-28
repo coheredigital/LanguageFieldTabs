@@ -3,10 +3,12 @@
 /**
  * ProcessWire Language Field Tabs
  *
- * Organizes Lagnuage Fields into tabs for a cleaner easier to use interface
+ * Organizes Language Fields into tabs for a cleaner easier to use interface
+ *
+ * By Adamspruijt, Copyright 2013
  * 
- * ProcessWire 2.x 
- * Copyright (C) 2011 by Ryan Cramer 
+ * For ProcessWire 2.x 
+ * Copyright (C) 2013 by Ryan Cramer 
  * Licensed under GNU/GPL v2, see LICENSE.TXT
  * 
  *
@@ -14,23 +16,30 @@
 
 class LanguageFieldTabs extends WireData implements Module {
 
-
 	public static function getModuleInfo() {
 
 		return array(
 
 			'title' => 'Language Field Tabs',
-			'version' => 104,
-			'summary' => 'Organizes Lagnuage Fields into tabs for a cleaner easier to use interface',
+			'version' => 105,
+			'summary' => 'Organizes Language Fields into tabs for a cleaner easier to use interface',
+			'author' => 'adamspruijt', 
 			'href' => '',
 			'singular' => true,
 			'autoload' => true,
 		);
 	}
 
-	public function init() {
+	public function init() { }
+
+	public function ready() {
+		if($this->page->template != 'admin') return;
+
 		$this->addHookAfter('ProcessPageEdit::execute', $this, 'loadTabs');
 		$this->addHookAfter('Process::executeEdit', $this, 'loadTabs');
+
+		$settings = array('title' => $this->_('Expand Language Tabs')); 
+		$this->config->js('LanguageFieldTabs', $settings); 
 	}
 
 	public function loadTabs(){
