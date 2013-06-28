@@ -51,7 +51,7 @@ $(function(){
 				i++;
 			});
 
-			var $span = $("<span class='langTabsToggle ui-icon ui-icon-arrowthickstop-1-s'></span>")
+			var $span = $("<span></span>")
 				.attr('title', config.LanguageFieldTabs.title)
 				.attr('class', 'langTabsToggle ui-icon ui-icon-arrowthickstop-1-s'); 
 
