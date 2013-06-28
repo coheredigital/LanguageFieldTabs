@@ -51,7 +51,11 @@ $(function(){
 				i++;
 			});
 
-			$langContent.addClass("langTabsContainer").siblings("label").prepend("<span title='Expand Language Tabs' class='langTabsToggle ui-icon ui-icon-arrowthickstop-1-s'></span>");
+			var $span = $("<span class='langTabsToggle ui-icon ui-icon-arrowthickstop-1-s'></span>")
+				.attr('title', config.LanguageFieldTabs.title)
+				.attr('class', 'langTabsToggle ui-icon ui-icon-arrowthickstop-1-s'); 
+
+			$langContent.addClass("langTabsContainer").siblings("label").prepend($span); 
 
 			$langTabsBox.tabs();
 		}
@@ -80,4 +84,4 @@ $(function(){
 
 
 
-});
+}); 
