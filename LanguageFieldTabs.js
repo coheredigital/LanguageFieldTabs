@@ -1,27 +1,33 @@
 $(function(){
-	// alert("loaded");
-	var $langField = $(".Inputfield > .ui-widget-content").has(".LanguageSupport");
+
+	var $langField = $(".Inputfield").has(".LanguageSupport");
 	$langField.each(function(){
+
 		var $this = $(this);
 
-		// console.log($this.children(".LanguageSupport").length);
- 
-		var $langBox = $this.children(".LanguageSupport");
-		if ( $langBox.length > 1) { //should avoid applying to single language field like Languge "alt" fields
+		var $langHeader =  $this.children(".ui-widget-header");
+		var $langContent =  $this.children(".ui-widget-content");
+		var $langSupport = $langContent.children(".LanguageSupport");
 
-			var fieldID = $this.parent(".Inputfield").attr("id");
+
+		if ( $langSupport.length > 1) { //should avoid applying to single language field like Language "alt" fields
+
+
+			var fieldID = $this.attr("id"); // we will later combine the input ID with the index to create unique anchors for jqueryui tabs to use
+			var i = 0;
 
 			// markup variables
 			var LangTabsBox = "<div class='langTabs'><ul></ul></div>";
-			var i = 0;
+			
+
 
 			// add the markup the LangTabs will go inside
-			$this.append(LangTabsBox);
-			var $langTabsBox = $this.children(".langTabs"); 
+			$langContent.append(LangTabsBox);
+			var $langTabsBox = $this.find(".langTabs"); 
 			var $langTabs = $langTabsBox.children("ul"); 
 
 
-			$langBox.each(function(){
+			$langSupport.each(function(){
 
 				var $this = $(this);
 
@@ -29,24 +35,15 @@ $(function(){
 				var label = $this.children("label").text();
 				var anchor = fieldID+i;
 
-				
-
 				var $textarea = $this.find("textarea");
 				var $input = $this.find("input");
 
 				var fieldValueClass;
-				if ($textarea.length > 0 && $textarea.text()) {
-					fieldValue = "";
-					console.log("TEXTAREA: TRUE");
-				}
-				else if($input.length > 0 && $input.val()){
-					fieldValue = "";
-					console.log("INPUT: TRUE");
-				}
-				else{
-					console.log("FALSE");
-					fieldValueClass = "langTabEmpty";
-				}
+
+				if ($textarea.length > 0 && $textarea.text()) fieldValue = "";
+				else if($input.length > 0 && $input.val()) fieldValue = "";
+				else fieldValueClass = "langTabEmpty";
+				
 
 				$langTabs.append("<li><a class='"+fieldValueClass+"' href='#"+anchor+"'>"+label+"</a></li>");
 				$this.attr("id", anchor).appendTo($langTabsBox);
@@ -54,7 +51,7 @@ $(function(){
 				i++;
 			});
 
-			$this.addClass("langTabsContainer").prepend("<span title='Expand Language Tabs' class='langTabsToggle ui-button ui-state-default'><span class='ui-icon ui-icon-arrowstop-1-s'></span></span>");
+			$langContent.addClass("langTabsContainer").siblings("label").prepend("<span title='Expand Language Tabs' class='langTabsToggle ui-icon ui-icon-arrowthickstop-1-s'></span>");
 
 			$langTabsBox.tabs();
 		}
@@ -62,13 +59,17 @@ $(function(){
 		// state toggle button to turn tabs on and off
 		// will add class of "langTabsOff" so we can hide the menu markup
 
-		var $langTabsToggle = $(".langTabsToggle");
+		var $langTabsToggle = $langHeader.children(".langTabsToggle");
 		$langTabsToggle.toggle(function(){
-			$(this).siblings(".langTabs").addClass('langTabsOff').tabs( "destroy" );
-			$(this).attr("title","Collapse Language Tabs").children(".ui-icon").removeClass("ui-icon-arrowstop-1-s").addClass("ui-icon-arrowstop-1-n");
+
+
+			$this.addClass('langTabsOff');
+			$langTabsBox.tabs( "destroy" );
+			$(this).attr("title","Collapse Language Tabs").removeClass("ui-icon-arrowthickstop-1-s").addClass("ui-icon-arrowthickstop-1-n");
 		}, function(){
-			$(this).siblings(".langTabs").removeClass('langTabsOff').tabs();
-			$(this).attr("title","Expand Language Tabs").children(".ui-icon").addClass("ui-icon-arrowstop-1-s").removeClass("ui-icon-arrowstop-1-n");
+			$this.removeClass('langTabsOff');
+			$langTabsBox.tabs();
+			$(this).attr("title","Expand Language Tabs").addClass("ui-icon-arrowthickstop-1-s").removeClass("ui-icon-arrowthickstop-1-n");
 		});
 
 		$langTabsToggle.mouseout(function(){
