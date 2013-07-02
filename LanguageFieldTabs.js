@@ -32,7 +32,8 @@ $(function(){
 				var $this = $(this);
 
 
-				var label = $this.children("label").text();
+				var label = $this.children(".LanguageSupportLabel").text();
+				console.log(label);
 				var anchor = fieldID+i;
 
 				var $textarea = $this.find("textarea");
@@ -66,11 +67,12 @@ $(function(){
 		var $langTabsToggle = $langHeader.children(".langTabsToggle");
 		$langTabsToggle.toggle(function(){
 
-
+			$langContent.removeClass("langTabsContainer");
 			$this.addClass('langTabsOff');
 			$langTabsBox.tabs( "destroy" );
 			$(this).attr("title","Collapse Language Tabs").removeClass("ui-icon-arrowthickstop-1-s").addClass("ui-icon-arrowthickstop-1-n");
 		}, function(){
+			$langContent.addClass("langTabsContainer");
 			$this.removeClass('langTabsOff');
 			$langTabsBox.tabs();
 			$(this).attr("title","Expand Language Tabs").addClass("ui-icon-arrowthickstop-1-s").removeClass("ui-icon-arrowthickstop-1-n");
