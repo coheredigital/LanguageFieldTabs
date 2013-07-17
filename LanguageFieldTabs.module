@@ -21,7 +21,7 @@ class LanguageFieldTabs extends WireData implements Module {
 		return array(
 
 			'title' => 'Language Field Tabs',
-			'version' => 106,
+			'version' => 107,
 			'summary' => 'Organizes Language Fields into tabs for a cleaner easier to use interface',
 			'author' => 'adamspruijt', 
 			'href' => '',

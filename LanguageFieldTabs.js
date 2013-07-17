@@ -33,19 +33,30 @@ $(function(){
 
 
 				var label = $this.children(".LanguageSupportLabel").text();
-				console.log(label);
+				// console.log(label);
 				var anchor = fieldID+i;
 
 				var $textarea = $this.find("textarea");
 				var $input = $this.find("input");
+				var $textareaInline = $this.find("div[contenteditable]"); 
+				var fieldValueClass = 'langTabEmpty';
 
-				var fieldValueClass;
+				if($textarea.length > 0) { 
+					if($textarea.text().length > 0) fieldValueClass = '';
 
-				if ($textarea.length > 0 && $textarea.text()) fieldValue = "";
-				else if($input.length > 0 && $input.val()) fieldValue = "";
-				else fieldValueClass = "langTabEmpty";
+				} else if($textareaInline.length > 0) { 
+					if($textareaInline.text().length > 0) fieldValueClass = '';
+
+				} else if($input.length > 0 && $input.eq(0).val().length > 0) {
+					if($input.attr('name').indexOf('_pw_page_name') === 0) {
+						// defer to the "active" checkbox in determining whether it shows empty class or not
+						var $checkbox = $input.next('label').children('input[type=checkbox]'); 	
+						if(!$checkbox.size() || $checkbox.is(":checked")) fieldValueClass = '';
+					} else {
+						fieldValueClass = '';
+					}
+				}
 				
-
 				$langTabs.append("<li><a class='"+fieldValueClass+"' href='#"+anchor+"'>"+label+"</a></li>");
 				$this.attr("id", anchor).appendTo($langTabsBox);
 
