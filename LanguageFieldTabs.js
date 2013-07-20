@@ -69,7 +69,7 @@ $(function(){
 
 			$langContent.addClass("langTabsContainer").siblings("label").prepend($span); 
 
-			$langTabsBox.tabs();
+			$langTabsBox.tabs({ active: config.LanguageFieldTabs.activeTab });
 		}
 
 		// state toggle button to turn tabs on and off
