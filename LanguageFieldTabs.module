@@ -21,7 +21,7 @@ class LanguageFieldTabs extends WireData implements Module {
 		return array(
 
 			'title' => 'Language Field Tabs',
-			'version' => 107,
+			'version' => 108,
 			'summary' => 'Organizes Language Fields into tabs for a cleaner easier to use interface',
 			'author' => 'adamspruijt', 
 			'href' => '',
@@ -38,7 +38,28 @@ class LanguageFieldTabs extends WireData implements Module {
 		$this->addHookAfter('ProcessPageEdit::execute', $this, 'loadTabs');
 		$this->addHookAfter('Process::executeEdit', $this, 'loadTabs');
 
-		$settings = array('title' => $this->_('Expand Language Tabs')); 
+		$language = null;
+		// allow for specifying language in your "edit" page link, from front-end
+		// so if you want to focus on the Spanish tabs when the user clicks "edit"
+		// from /es/path/to/page/, then you can by using a page edit link like:
+		// <a href='{$config->urls->admin}page/edit/?id=$page->id&language=$user->language'>Edit</a>
+		$id = (int) $this->input->get->language;
+		if($id) $language = $this->languages->get($id); 
+
+		// if language is not specified as a GET variable, then use the user's language
+		if(!$language || !$language->id) $language = $this->user->language; 
+
+		// determine the index of the tab for the user's language	
+		$activeTab = 0; 	
+		foreach($this->languages as $index => $lang) {
+			if($lang->id == $language->id) $activeTab = $index; 
+		}
+
+		$settings = array(
+			'title' => $this->_('Expand Language Tabs'),
+			'activeTab' => $activeTab, 
+			); 
+
 		$this->config->js('LanguageFieldTabs', $settings); 
 	}
 
