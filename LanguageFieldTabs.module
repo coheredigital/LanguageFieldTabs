@@ -21,7 +21,7 @@ class LanguageFieldTabs extends WireData implements Module {
 		return array(
 
 			'title' => 'Language Field Tabs',
-			'version' => 108,
+			'version' => 109,
 			'summary' => 'Organizes Language Fields into tabs for a cleaner easier to use interface',
 			'author' => 'adamspruijt', 
 			'href' => '',
@@ -37,6 +37,11 @@ class LanguageFieldTabs extends WireData implements Module {
 
 		$this->addHookAfter('ProcessPageEdit::execute', $this, 'loadTabs');
 		$this->addHookAfter('Process::executeEdit', $this, 'loadTabs');
+		
+		// support for Fredi 
+		if($this->modules->isInstalled("FrediProcess")) {
+			$this->addHookAfter('FrediProcess::execute', $this, 'loadTabs');
+		}
 
 		$language = null;
 		// allow for specifying language in your "edit" page link, from front-end
